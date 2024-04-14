@@ -1,16 +1,19 @@
-# This is a sample Python script.
+import numpy as np
+import pandas as pd
+import os
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+# Get a list of all CSV files
+csv_files = [os.path.join('data', file) for file in os.listdir('data')]
 
+# Create an empty dictionary that will consist of crypto dataframes
+dataframes = {}
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# Loop through each CSV file and create a dataframe
+for file in csv_files:
+    # Extract dataframe name from file name (without the extension)
+    df_name = os.path.splitext(os.path.basename(file))[0]
+    # Read the CSV file into a dataframe and store it in the dictionary
+    dataframes[df_name] = pd.read_csv(file)
+    
+# Now, we have a dictionary where keys are dataframe names and values are dtaframes
+# We can access each dataframe using its name, e.g., dataframes['filename']
